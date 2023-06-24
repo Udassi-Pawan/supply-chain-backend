@@ -93,3 +93,21 @@ services:
     hostname: localhost
     networks:
       - supplychain
+
+  orderer-ca-org:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/orderer-ca-org
+      - FABRIC_CA_SERVER_CA_NAME=orderer-ca-org
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=tls/cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=tls/key.pem
+    ports:
+      - "7065:7054"
+    command: sh -c 'fabric-ca-server start -b rcaadmin:rcaadminpw -d'
+    volumes:
+      - ./fabric-ca/fabric-ca-servers-org/orderer:/etc/hyperledger/orderer-ca-org
+    container_name: orderer-ca-org
+    hostname: localhost
+    networks:
+      - supplychain

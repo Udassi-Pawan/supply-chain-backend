@@ -1,9 +1,9 @@
 export home=$PWD
-myArray=('manufacturer' 'distributor1' 'distributor2' 'retailer1' 'retailer2')
+myArray=('manufacturer' 'distributor1' 'distributor2' 'retailer1' 'retailer2' 'orderer')
 
 ./create-folder-structure.sh
 docker-compose up -d
-# sleep 2
+sleep 2
 
 copyRootCertsForAllOrgsTlsCa() {
     cd $home
@@ -14,7 +14,7 @@ copyRootCertsForAllOrgsTlsCa() {
 }
 
 copyRootCertsForAllOrgsTlsCa
-# sleep 2
+sleep 2
 
 enrollAdminForAllOrgsTlsCa() {
     export FABRIC_CA_CLIENT_HOME=${home}/fabric-ca/fabric-ca-client
@@ -26,7 +26,7 @@ enrollAdminForAllOrgsTlsCa() {
 }
 
 enrollAdminForAllOrgsTlsCa
-# sleep 2
+sleep 2
 
 getTlsCertsForAllOrgsCaAdmin() {
     export FABRIC_CA_CLIENT_HOME=${home}/fabric-ca/fabric-ca-client
@@ -49,13 +49,13 @@ getTlsCertsForAllOrgsCaAdmin() {
 }
 
 getTlsCertsForAllOrgsCaAdmin
-# sleep 2
+sleep 2
 
 enrollOrgCaAdminForAllOrgs() {
     export FABRIC_CA_CLIENT_HOME=${home}/fabric-ca/fabric-ca-client
     cd ${home}
     docker-compose -f ./docker-compose-orgs-ca.yaml up -d
-    # sleep 5
+    sleep 5
 
     for i in ${!myArray[@]}; do
         export orgVar=${myArray[$i]}
@@ -66,4 +66,4 @@ enrollOrgCaAdminForAllOrgs() {
 }
 
 enrollOrgCaAdminForAllOrgs
-# sleep 2
+sleep 2
