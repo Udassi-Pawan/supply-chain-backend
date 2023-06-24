@@ -1,0 +1,85 @@
+version: "2"
+
+networks:
+  supplychain:
+
+services:
+  manufacturer-ca-tls:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/manufacturer-ca-tls
+      - FABRIC_CA_SERVER_CA_NAME=manufacturer-ca-tls
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+    ports:
+      - "7054:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./fabric-ca/fabric-ca-servers-tls/manufacturer-ca-tls:/etc/hyperledger/manufacturer-ca-tls
+    container_name: manufacturer-ca-tls
+    hostname: localhost
+    networks:
+      - supplychain
+
+  distributor1-ca-tls:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/distributor1-ca-tls
+      - FABRIC_CA_SERVER_CA_NAME=distributor1-ca-tls
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+    ports:
+      - "7055:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./fabric-ca/fabric-ca-servers-tls/distributor1-ca-tls:/etc/hyperledger/distributor1-ca-tls
+    container_name: distributor1-ca-tls
+    hostname: localhost
+    networks:
+      - supplychain
+
+  distributor2-ca-tls:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/distributor2-ca-tls
+      - FABRIC_CA_SERVER_CA_NAME=distributor2-ca-tls
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+    ports:
+      - "7056:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./fabric-ca/fabric-ca-servers-tls/distributor2-ca-tls:/etc/hyperledger/distributor2-ca-tls
+    container_name: distributor2-ca-tls
+    hostname: localhost
+    networks:
+      - supplychain
+
+  retailer1-ca-tls:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/retailer1-ca-tls
+      - FABRIC_CA_SERVER_CA_NAME=retailer1-ca-tls
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+    ports:
+      - "7057:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./fabric-ca/fabric-ca-servers-tls/retailer1-ca-tls:/etc/hyperledger/retailer1-ca-tls
+    container_name: retailer1-ca-tls
+    hostname: localhost
+    networks:
+      - supplychain
+
+  retailer2-ca-tls:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/retailer2-ca-tls
+      - FABRIC_CA_SERVER_CA_NAME=retailer2-ca-tls
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+    ports:
+      - "7058:7054"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ./fabric-ca/fabric-ca-servers-tls/retailer2-ca-tls:/etc/hyperledger/retailer2-ca-tls
+    container_name: retailer2-ca-tls
+    hostname: localhost
+    networks:
+      - supplychain

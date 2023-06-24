@@ -1,0 +1,95 @@
+version: "2"
+
+networks:
+  supplychain:
+
+services:
+  manufacturer-ca-org:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/manufacturer-ca-org
+      - FABRIC_CA_SERVER_CA_NAME=manufacturer-ca-org
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=tls/cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=tls/key.pem
+    ports:
+      - "7060:7054"
+    command: sh -c 'fabric-ca-server start -b rcaadmin:rcaadminpw -d'
+    volumes:
+      - ./fabric-ca/fabric-ca-servers-org/manufacturer:/etc/hyperledger/manufacturer-ca-org
+    container_name: manufacturer-ca-org
+    hostname: localhost
+    networks:
+      - supplychain
+
+  distributor1-ca-org:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/distributor1-ca-org
+      - FABRIC_CA_SERVER_CA_NAME=distributor1-ca-org
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=tls/cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=tls/key.pem
+    ports:
+      - "7061:7054"
+    command: sh -c 'fabric-ca-server start -b rcaadmin:rcaadminpw -d'
+    volumes:
+      - ./fabric-ca/fabric-ca-servers-org/distributor1:/etc/hyperledger/distributor1-ca-org
+    container_name: distributor1-ca-org
+    hostname: localhost
+    networks:
+      - supplychain
+
+  distributor2-ca-org:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/distributor2-ca-org
+      - FABRIC_CA_SERVER_CA_NAME=distributor2-ca-org
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=tls/cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=tls/key.pem
+    ports:
+      - "7062:7054"
+    command: sh -c 'fabric-ca-server start -b rcaadmin:rcaadminpw -d'
+    volumes:
+      - ./fabric-ca/fabric-ca-servers-org/distributor2:/etc/hyperledger/distributor2-ca-org
+    container_name: distributor2-ca-org
+    hostname: localhost
+    networks:
+      - supplychain
+
+  retailer1-ca-org:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/retailer1-ca-org
+      - FABRIC_CA_SERVER_CA_NAME=retailer1-ca-org
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=tls/cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=tls/key.pem
+    ports:
+      - "7063:7054"
+    command: sh -c 'fabric-ca-server start -b rcaadmin:rcaadminpw -d'
+    volumes:
+      - ./fabric-ca/fabric-ca-servers-org/retailer1:/etc/hyperledger/retailer1-ca-org
+    container_name: retailer1-ca-org
+    hostname: localhost
+    networks:
+      - supplychain
+
+  retailer2-ca-org:
+    image: hyperledger/fabric-ca
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/retailer2-ca-org
+      - FABRIC_CA_SERVER_CA_NAME=retailer2-ca-org
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=tls/cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=tls/key.pem
+    ports:
+      - "7064:7054"
+    command: sh -c 'fabric-ca-server start -b rcaadmin:rcaadminpw -d'
+    volumes:
+      - ./fabric-ca/fabric-ca-servers-org/retailer2:/etc/hyperledger/retailer2-ca-org
+    container_name: retailer2-ca-org
+    hostname: localhost
+    networks:
+      - supplychain
