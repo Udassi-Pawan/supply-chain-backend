@@ -14,7 +14,6 @@ copyRootCertsForAllOrgsTlsCa() {
 }
 
 copyRootCertsForAllOrgsTlsCa
-sleep 2
 
 enrollAdminForAllOrgsTlsCa() {
     export FABRIC_CA_CLIENT_HOME=${home}/fabric-ca/fabric-ca-client
@@ -26,7 +25,7 @@ enrollAdminForAllOrgsTlsCa() {
 }
 
 enrollAdminForAllOrgsTlsCa
-sleep 2
+sleep 1
 
 getTlsCertsForAllOrgsCaAdmin() {
     export FABRIC_CA_CLIENT_HOME=${home}/fabric-ca/fabric-ca-client
@@ -49,13 +48,13 @@ getTlsCertsForAllOrgsCaAdmin() {
 }
 
 getTlsCertsForAllOrgsCaAdmin
-sleep 2
+sleep 1
 
 enrollOrgCaAdminForAllOrgs() {
     export FABRIC_CA_CLIENT_HOME=${home}/fabric-ca/fabric-ca-client
     cd ${home}
     docker-compose -f ./docker-compose-orgs-ca.yaml up -d
-    sleep 5
+    sleep 1
 
     for i in ${!myArray[@]}; do
         export orgVar=${myArray[$i]}
@@ -66,4 +65,3 @@ enrollOrgCaAdminForAllOrgs() {
 }
 
 enrollOrgCaAdminForAllOrgs
-sleep 2
